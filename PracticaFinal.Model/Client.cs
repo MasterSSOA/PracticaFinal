@@ -10,7 +10,6 @@ namespace PracticaFinal.Models
     {
         public int ClientId { get; set; }
         public string ClientFullName { get; set; }
-        public List<Account> Accounts { get; set; }
-        public User User { get; set; }
+        public List<int> Accounts { get; set; }
     }
 }

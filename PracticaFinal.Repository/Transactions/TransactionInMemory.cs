@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PracticaFinal.Models;
+using PracticaFinal.Repository.Accounts;
 
 namespace PracticaFinal.Repository.Transactions
 {
@@ -11,30 +12,135 @@ namespace PracticaFinal.Repository.Transactions
     {
         //Properties.
         private readonly List<Transaction> transactions;
+        AccountInMemory accountInMemory = new AccountInMemory();
 
         //Constructor.
-        public TransactionInMemory()
-        {
-            transactions = new List<Transaction>()
+        public TransactionInMemory() => transactions = new List<Transaction>()
             {
+                //Account = 20105136.
                 new Transaction()
                 {
-                    AccountFrom = 20105136,
-                    AccountTo = 20235624,
+                    TransNumber = 1,
+                    AccountFrom = accountInMemory.GetAccount(20105136),
+                    AccountTo = accountInMemory.GetAccount(20235624),
+                    Amount = 20500,
+                    TransDate = new DateTime(2021, 10, 9, 13, 53, 21),
+                    TransDescription = "Transacción no. 64512315"
+                },
+                new Transaction()
+                {
+                    TransNumber = 1,
+                    AccountFrom = accountInMemory.GetAccount(20105136),
+                    AccountTo = accountInMemory.GetAccount(51254826),
+                    Amount = 1862,
+                    TransDate = new DateTime(2021, 10, 8, 12, 25, 30),
+                    TransDescription = "Transacción no. 64513234"
 
+                },
+                new Transaction()
+                {
+                    TransNumber = 1,
+                    AccountFrom = accountInMemory.GetAccount(20105136),
+                    AccountTo = accountInMemory.GetAccount(20235624),
+                    Amount = 5089,
+                    TransDate = new DateTime(2021, 10, 09, 18, 21, 02),
+                    TransDescription = "Transacción no. 23123245"
+                },
 
+                 //Account = 20235624.
+                new Transaction()
+                {
+                    TransNumber = 1,
+                    AccountFrom = accountInMemory.GetAccount(20235624),
+                    AccountTo = accountInMemory.GetAccount(20105136),
+                    Amount = 12350,
+                    TransDate = new DateTime(2021, 8, 14, 15, 23, 51),
+                    TransDescription = "Transacción no. 12312334"
+                },
+                new Transaction()
+                {
+                    TransNumber = 1,
+                    AccountFrom = accountInMemory.GetAccount(20235624),
+                    AccountTo = accountInMemory.GetAccount(51254826),
+                    Amount = 6752,
+                    TransDate = new DateTime(2021, 10, 2, 11, 54, 3),
+                    TransDescription = "Transacción no. 62312312"
+
+                },
+                new Transaction()
+                {
+                    TransNumber = 1,
+                    AccountFrom = accountInMemory.GetAccount(20235624),
+                    AccountTo = accountInMemory.GetAccount(62548214),
+                    Amount = 7879,
+                    TransDate = new DateTime(2021, 10, 5, 14, 5, 2),
+                    TransDescription = "Transacción no. 64534534"
+                },
+
+                //Account = 51254826.
+                new Transaction()
+                {
+                    TransNumber = 1,
+                    AccountFrom = accountInMemory.GetAccount(51254826),
+                    AccountTo = accountInMemory.GetAccount(20105136),
+                    Amount = 56756,
+                    TransDate = new DateTime(2021, 8, 14, 15, 23, 51),
+                    TransDescription = "Transacción no. 67675456"
+                },
+                new Transaction()
+                {
+                    TransNumber = 1,
+                    AccountFrom = accountInMemory.GetAccount(51254826),
+                    AccountTo = accountInMemory.GetAccount(20235624),
+                    Amount = 4565,
+                    TransDate = new DateTime(2021, 10, 2, 11, 54, 3),
+                    TransDescription = "Transacción no. 34244556"
+
+                },
+                new Transaction()
+                {
+                    TransNumber = 1,
+                    AccountFrom = accountInMemory.GetAccount(51254826),
+                    AccountTo = accountInMemory.GetAccount(62548214),
+                    Amount = 5677,
+                    TransDate = new DateTime(2021, 10, 4, 20, 4, 8),
+                    TransDescription = "Transacción no. 23423457"
+                },
+
+                //Account = 62548214.
+                new Transaction()
+                {
+                    TransNumber = 1,
+                    AccountFrom = accountInMemory.GetAccount(62548214),
+                    AccountTo = accountInMemory.GetAccount(20105136),
+                    Amount = 12345,
+                    TransDate = new DateTime(2021, 10, 09, 23, 23, 51),
+                    TransDescription = "Transacción no. 85645635"
+                },
+                new Transaction()
+                {
+                    TransNumber = 1,
+                    AccountFrom = accountInMemory.GetAccount(62548214),
+                    AccountTo = accountInMemory.GetAccount(20235624),
+                    Amount = 9878,
+                    TransDate = new DateTime(2021, 10, 1, 13, 54, 3),
+                    TransDescription = "Transacción no. 89778544"
+
+                },
+                new Transaction()
+                {
+                    TransNumber = 1,
+                    AccountFrom = accountInMemory.GetAccount(62548214),
+                    AccountTo = accountInMemory.GetAccount(51254826),
+                    Amount = 3423,
+                    TransDate = new DateTime(2021, 10, 10, 18, 2, 9),
+                    TransDescription = "Transacción no. 12312345"
                 }
             };
-        }
-        public List<Transaction> GetTransactions(int From, int To, DateTime initialDate, DateTime finalDate)
-        {
-            throw new NotImplementedException();
-        }
 
-        public List<Transaction> GetTransactions(Account From, Account To, DateTime initialDate, DateTime finalDate)
-        {
-            throw new NotImplementedException();
-        }
-
+        //Methods.
+        public List<Transaction> GetTransactions(Account accountNo, DateTime initialDate, DateTime finalDate)
+        => transactions.FindAll(t => (t.AccountFrom.Equals(accountNo.AccountNumber) || t.AccountTo.Equals(accountNo.AccountNumber))
+                                  && (initialDate <= t.TransDate && t.TransDate <= finalDate));
     }
 }

@@ -11,7 +11,6 @@ namespace PracticaFinal.Repository.Accounts
     {
         //Properties.
         private readonly List<Account> accounts;
-        ClientInMemory clientInMemory = new ClientInMemory();
 
         //Constructor.
         public AccountInMemory() => accounts = new List<Account>()
@@ -20,29 +19,25 @@ namespace PracticaFinal.Repository.Accounts
                 {
                     AccountNumber = 20105136,
                     AccountBalance = 124560.50,
-                    ClientId = 1,
-                    Client = clientInMemory.GetClient(1)
+                    ClientId = 1
                 },
                 new Account()
                 {
                     AccountNumber = 20235624,
                     AccountBalance = 40860.20,
-                    ClientId = 1,
-                    Client = clientInMemory.GetClient(1)
+                    ClientId = 1
                 },
                 new Account()
                 {
                     AccountNumber = 51254826,
                     AccountBalance = 080582.50,
-                    ClientId = 2,
-                    Client = clientInMemory.GetClient(2)
+                    ClientId = 2
                 },
                 new Account()
                 {
                     AccountNumber = 62548214,
                     AccountBalance = 58020.20,
-                    ClientId = 2,
-                    Client = clientInMemory.GetClient(2)
+                    ClientId = 2
                 }
             };
 

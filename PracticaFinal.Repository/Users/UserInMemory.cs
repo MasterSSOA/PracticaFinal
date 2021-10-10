@@ -10,10 +10,7 @@ namespace PracticaFinal.Repository.Users
     public class UserInMemory : IUserRepository
     {
         //Properties.
-        ClientInMemory ClientInMemory = new ClientInMemory();
         private readonly List<User> users;
-        private User user;
-        private Client client;
 
         //Constructor.
         public UserInMemory() => users = new List<User>()
@@ -23,8 +20,7 @@ namespace PracticaFinal.Repository.Users
                     UserId = 1, 
                     UserName = "PRamirez", 
                     UserPass = "1234", 
-                    ClientId = 1, 
-                    Client = ClientInMemory.GetClient(1)
+                    ClientId = 1
                 },
 
                  new User()
@@ -32,22 +28,12 @@ namespace PracticaFinal.Repository.Users
                     UserId = 1,
                     UserName = "BMartinez",
                     UserPass = "4321",
-                    ClientId = 2,
-                    Client = ClientInMemory.GetClient(2)
+                    ClientId = 2
                 }
             };
 
         //Methods.
-        public User GetUser(int Userid) => users.Find(c => c.UserId.Equals(Userid));
-        public Client UserValidation(string user, string pass)
-        {
-            if (users.Exists(u => (u.UserName.Equals(user) && u.UserPass.Equals(pass))))
-            {
-                this.user = users.Find(u => (u.UserName.Equals(user) && u.UserPass.Equals(pass)));
-                client = ClientInMemory.GetClient(this.user.ClientId);
-                return client;
-            }
-            return null;
-        }
+        public User UserValidation(string user, string pass)
+            => users.Find(u => (u.UserName.Equals(user) && u.UserPass.Equals(pass)));
     }
 }

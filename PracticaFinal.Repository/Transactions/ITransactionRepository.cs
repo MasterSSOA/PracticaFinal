@@ -9,6 +9,6 @@ namespace PracticaFinal.Repository.Transactions
 {
     public interface ITransactionRepository
     {
-        public List<Transaction> GetTransactions(Account From, Account To, DateTime initialDate, DateTime finalDate);
+        public List<Transaction> GetTransactions(Account accountNo, DateTime initialDate, DateTime finalDate);
     }
 }

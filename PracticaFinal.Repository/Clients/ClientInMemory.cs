@@ -13,9 +13,6 @@ namespace PracticaFinal.Repository
     {
         //Properties.
         private readonly List<Client> clients;
-        UserInMemory userInMemory = new UserInMemory();
-        AccountInMemory accountInMemory = new AccountInMemory();
-
 
         //Constructor.
         public ClientInMemory() => clients = new List<Client>()
@@ -24,15 +21,13 @@ namespace PracticaFinal.Repository
                {
                     ClientId = 1,
                     ClientFullName = "Pedro Ramirez Sosa",
-                    Accounts = accountInMemory.GetAccounts(1),
-                    User = userInMemory.GetUser(1)
+                    Accounts = new List<int>() {20105136, 20235624}
                },
                new Client()
                {
                     ClientId = 2,
                     ClientFullName = "Benito Martinez",
-                    Accounts = accountInMemory.GetAccounts(2),
-                    User = userInMemory.GetUser(2)
+                    Accounts = new List<int>() {51254826, 62548214}
                }
             };
 
