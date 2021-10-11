@@ -4,6 +4,10 @@
     ViewData["Title"] = "Transacciones";
 }
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
 <div>
     <h3>Transacciones</h3>
     <br />
@@ -16,13 +20,17 @@
         &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
         <label>Fecha final:</label>
     </div>
-    <div>
-        <input id="date1" type="date" />&emsp;
-        <input id="date2" type="date" />
-        <br />
-    </div>
+    <form id="dateForm" method="post">
+        <div>
+            <input id="date1" type="date" asp-for=@Model.date1 />&emsp;
+            <input id="date2" type="date" asp-for=@Model.date2 />
+            <span id="dateError" class="alert-danger"></span>
+            <br />
+        </div>
+    </form>
 </div>
 <div>
+    <br />
     @foreach (var transaction in Model.transactions)
     {
         <button type="submit" class="btn btn-outline-secondary btn-block">
@@ -36,12 +44,11 @@
             <span class="float-right">
                 @if (Model.AccountNumber.Equals(transaction.AccountFrom))
                 {
-                    @("RD$ -" + string.Format("{0:0,0.00}", transaction.Amount))
+                    <span style="color:darkred"> @("RD$ -" + string.Format("{0:0,0.00}", transaction.Amount)) </span>
                 }
                 else
                 {
-                    @("RD$ +" + string.Format("{0:0,0.00}", transaction.Amount))
-
+                    <span style="color:darkslategrey">@("RD$ +" + string.Format("{0:0,0.00}", transaction.Amount))</span>
                 }
 
             </span>

@@ -9,7 +9,7 @@ namespace PracticaFinal.Repository.Transactions
 {
     public interface ITransactionRepository
     {
-        public List<Transaction> GetTransactions(int accountFrom, DateTime? initialDate = null, DateTime? finalDate = null);
+        public List<Transaction> GetTransactions(int accountFrom, DateTime initialDate, DateTime finalDate);
         public void CreateTransaction(Transaction transaction);
     }
 }

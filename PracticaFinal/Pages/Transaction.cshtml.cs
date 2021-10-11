@@ -18,6 +18,9 @@ namespace PracticaFinal.Pages
         [TempData]
         public int ClientId { get; set; }
         [BindProperty]
+        public double amountAvailable { get; set; }
+
+        [BindProperty]
         public Transaction transaction { get; set; }
         [BindProperty]
         public string accountFrom { get; set; }
@@ -27,12 +30,12 @@ namespace PracticaFinal.Pages
         public string goBack { get; set; }
 
         private int _id;
+        public string Type;
         private List<Account> accounts;
         public IEnumerable<SelectListItem> accountsTo;
         public IEnumerable<SelectListItem> accountsFrom;
         private readonly IAccountRepository accountRepository;
         private readonly ITransactionRepository transactionRepository;
-        public string Type;
 
         //Constructor.
         public TransactionModel(IAccountRepository accountRepository, ITransactionRepository transactionRepository)
@@ -69,11 +72,12 @@ namespace PracticaFinal.Pages
                 if (!ModelState.IsValid)
                     return Page();
 
+                if (amountAvailable < transaction.Amount)
+                    return Page();
                 //Obteniendo datos de la transacción.
                 transaction.AccountFrom = accountRepository.GetNumberFromAmount(accountFrom);
                 transaction.AccountTo = accountRepository.GetNumberFromAmount(accountTo);
-                transaction.Amount = transaction.Amount;
-                transaction.TransDescription = "Transacción no. " + RandomDigits(10);
+                transaction.TransDescription = "Transacción no. " + RandomDigits(8);
                 transaction.TransDate = DateTime.Now;
 
                 //Creando transacción.
@@ -83,8 +87,7 @@ namespace PracticaFinal.Pages
             }
             return RedirectToPage("./Home");
         }
-
-        public string RandomDigits(int length)
+        private string RandomDigits(int length)
         {
             var random = new Random();
             string s = string.Empty;

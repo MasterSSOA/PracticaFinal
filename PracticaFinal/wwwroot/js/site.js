@@ -70,3 +70,38 @@ $(document).ready(function () {
 function getAccountNumber(object) {
     document.getElementById("inAccountNumber").value = object;
 }
+
+//Aplicar accion para filtrar por fecha.
+//date1
+$(document).ready(function () {
+    $('#date1').on('change', function () {
+        var d1 = document.getElementById("date1").value;
+        var d2 = document.getElementById("date2").value;
+
+        if (d2 < d1) {
+            document.getElementById("date1").value = document.getElementById("date2").value;
+            document.getElementById("dateError").innerHTML = "Fecha invalida";
+        }
+        else {
+            document.getElementById("dateForm").submit();
+        }
+
+       
+    })
+})
+
+//date2
+$(document).ready(function () {
+    $('#date2').on('change', function () {
+        var d1 = document.getElementById("date1").value;
+        var d2 = document.getElementById("date2").value;
+
+        if (d2 < d1) {
+            document.getElementById("date1").value = document.getElementById("date2").value;
+            document.getElementById("dateError").innerHTML = "Fecha invalida";
+        }
+        else {
+            document.getElementById("dateForm").submit();
+        }
+    })
+})

@@ -137,20 +137,17 @@ namespace PracticaFinal.Repository.Transactions
                 }
             };
 
-
         //Methods.
         public void CreateTransaction(Transaction transaction) =>
             transactions.Add(transaction);
+        private int Toint(DateTime date) => Convert.ToInt32(date.ToString("yyyyMMdd"));
 
-        public List<Transaction> GetTransactions(int accountFrom, DateTime? initialDate = null, DateTime? finalDate = null)
+        public List<Transaction> GetTransactions(int accountFrom, DateTime initialDate, DateTime finalDate)
         {
-            if (initialDate == null)
-            {
-                initialDate = new DateTime(1900, 01, 01);
-                finalDate = DateTime.Now;
-            }
-            return transactions.FindAll(t => t.AccountFrom.Equals(accountFrom) || t.AccountTo.Equals(accountFrom)
-             && (initialDate <= t.TransDate && t.TransDate <= finalDate));
+            finalDate = finalDate.AddHours(23).AddMinutes(59).AddSeconds(59);
+            return transactions.FindAll(t => (t.AccountFrom.Equals(accountFrom) || t.AccountTo.Equals(accountFrom))
+             && (initialDate <= t.TransDate && t.TransDate <= finalDate)).OrderByDescending(t => t.TransDate).ToList();
         }
+
     }
 }

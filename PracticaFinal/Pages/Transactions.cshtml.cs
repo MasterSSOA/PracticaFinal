@@ -14,6 +14,11 @@ namespace PracticaFinal.Pages
         //Properties.
         [TempData]
         public int AccountNumber { get; set; }
+        [BindProperty]
+        public DateTime date1 { get; set; }
+        [BindProperty]
+        public DateTime date2 { get; set; }
+
         public Transaction transaction;
         public List<Transaction> transactions;
         private readonly ITransactionRepository transactionRepository;
@@ -31,10 +36,20 @@ namespace PracticaFinal.Pages
         {
             if (TempData["AccountNumber"] != null)
             {
-                transactions = transactionRepository.GetTransactions(AccountNumber);
+                date1 = DateTime.Now.AddMonths(-1);
+                date2 = DateTime.Now;
+                transactions = transactionRepository.GetTransactions(AccountNumber, date1, date2);
                 AccountNumber = (int)TempData["AccountNumber"];
                 TempData.Keep("AccountNumber");
             }
+        }
+
+        public IActionResult OnPost()
+        {
+            transactions = transactionRepository.GetTransactions(AccountNumber, date1, date2);
+            AccountNumber = (int)TempData["AccountNumber"];
+            TempData.Keep("AccountNumber");
+            return Page();
         }
     }
 }
