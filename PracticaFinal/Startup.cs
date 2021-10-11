@@ -4,12 +4,14 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using PracticaFinal.Repository.Transactions;
-using PracticaFinal.Repository.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PracticaFinal.Repository;
+using PracticaFinal.Repository.Users;
+using PracticaFinal.Repository.Accounts;
+using PracticaFinal.Repository.Transactions;
 
 namespace PracticaFinal
 {
@@ -25,8 +27,10 @@ namespace PracticaFinal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddSingleton<ITransactionRepository, TransactionInMemory>();
             services.AddSingleton<IUserRepository, UserInMemory>();
+            services.AddSingleton<ITransactionRepository, TransactionInMemory>();
+            services.AddSingleton<IClientRepository, ClientInMemory>();
+            services.AddSingleton<IAccountRepository, AccountInMemory>();
             services.AddRazorPages();
         }
 

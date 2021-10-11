@@ -13,26 +13,30 @@ namespace PracticaFinal.Pages
     public class IndexModel : PageModel
     {
         //Properties.
+        [TempData]
+        public int ClientId { get; set; }
+        [BindProperty]
+        public User user { get; set; }
         private readonly ILogger<IndexModel> _logger;
-        public User user;
-        public Client client;
-
+        private readonly IUserRepository userRepository;
 
         //Constructor.
-        public IndexModel(ILogger<IndexModel> logger,)
+        public IndexModel(ILogger<IndexModel> logger, IUserRepository userRepository)
         {
             _logger = logger;
+            this.userRepository = userRepository;
         }
 
         //Methods.
-
-        public void OnGet() 
+        public IActionResult OnPost()
         {
-        }
-        public void OnPost(string user, string pass)
-        {
-            //client = userRepository.UserValidation(user, pass);
-            //return !client.Equals(null) ? RedirectToPage("./Home", new { id = client.ClientId }) : Page();
+            var user = userRepository.UserValidation(this.user.UserName, this.user.UserPass);
+            if (user != null)
+            {
+                ClientId = user.ClientId;
+                return RedirectToPage("./Home");
+            }
+            return Page();
         }
     }
 }

@@ -1,0 +1,30 @@
+﻿@page 
+@model PracticaFinal.Pages.HomeModel
+@{
+    ViewData["Title"] = "Principal";
+}
+
+<div>
+    <h5>Bienvendo, @Model.client.ClientFullName 
+    <br>@DateTime.Now.ToString("dd MMMM, yyyy") </h5>
+    <br />
+    <p>Cuentas Bancarias:</p>
+</div>
+<div class="span2">
+
+    @foreach (var account in Model.accounts)
+    {
+    <button type="button" class="btn btn-outline-secondary btn-block">
+        <span class="float-left">
+            Ahorro o Corriente / @account.AccountNumber
+        </span>
+        <br />
+        <span class="float-left" style="color: #000000">
+            Balance :
+        </span>
+        <span class="float-right">
+            @("RD$ " + string.Format("{0:0,0.00}", account.AccountBalance))
+        </span>
+    </button>
+    }
+    </div>
