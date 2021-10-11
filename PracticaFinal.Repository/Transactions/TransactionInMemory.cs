@@ -142,8 +142,15 @@ namespace PracticaFinal.Repository.Transactions
         public void CreateTransaction(Transaction transaction) =>
             transactions.Add(transaction);
 
-        public List<Transaction> GetTransactions(Account accountNo, DateTime initialDate, DateTime finalDate)
-        => transactions.FindAll(t => (t.AccountFrom.Equals(accountNo.AccountNumber) || t.AccountTo.Equals(accountNo.AccountNumber))
-                                  && (initialDate <= t.TransDate && t.TransDate <= finalDate));
+        public List<Transaction> GetTransactions(int accountFrom, DateTime? initialDate = null, DateTime? finalDate = null)
+        {
+            if (initialDate == null)
+            {
+                initialDate = new DateTime(1900, 01, 01);
+                finalDate = DateTime.Now;
+            }
+            return transactions.FindAll(t => t.AccountFrom.Equals(accountFrom) || t.AccountTo.Equals(accountFrom)
+             && (initialDate <= t.TransDate && t.TransDate <= finalDate));
+        }
     }
 }

@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticaFinal", "PracticaFinal\PracticaFinal.csproj", "{D26E5857-6D2E-4360-B851-1C9E6A984712}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PracticaFinal", "PracticaFinal\PracticaFinal.csproj", "{D26E5857-6D2E-4360-B851-1C9E6A984712}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticaFinal.Models", "PracticaFinal.Model\PracticaFinal.Models.csproj", "{B32AE709-460E-414E-A71F-52D4B3D29FB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PracticaFinal.Models", "PracticaFinal.Model\PracticaFinal.Models.csproj", "{B32AE709-460E-414E-A71F-52D4B3D29FB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PracticaFinal.Repository", "PracticaFinal.Repository\PracticaFinal.Repository.csproj", "{A049BBB9-8EBD-4E4F-BE79-48C423540E7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PracticaFinal.Repository", "PracticaFinal.Repository\PracticaFinal.Repository.csproj", "{A049BBB9-8EBD-4E4F-BE79-48C423540E7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

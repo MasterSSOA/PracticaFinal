@@ -16,6 +16,8 @@ namespace PracticaFinal.Pages
         //Properties.
         private int _id;
         public List<Account> accounts;
+        [BindProperty]
+        public int AccountNumber { get; set; }
         public Client client { get; set; }
         private readonly IClientRepository clientRepository;
         private readonly IAccountRepository accountRepository;
@@ -42,9 +44,12 @@ namespace PracticaFinal.Pages
             return RedirectToPage("./Error");
         }
 
-        //public IActionResult OnPost()
-        //{
-        //    return RedirectToPage("./Transaction", new { Type = client.ClientId });
-        //}
+        public IActionResult OnPost()
+        {
+            TempData["AccountNumber"] = AccountNumber;
+            TempData.Keep("AccountNumber");
+
+            return RedirectToPage("./Transactions");
+        }
     }
 }

@@ -1,0 +1,52 @@
+﻿@page
+@model PracticaFinal.Pages.TransactionsModel
+@{
+    ViewData["Title"] = "Transacciones";
+}
+
+<div>
+    <h3>Transacciones</h3>
+    <br />
+    <h4>Ahorro o Corriente / @Model.AccountNumber</h4>
+    <br />
+</div>
+<div>
+    <div>
+        <label>Fecha inicial:</label>
+        &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+        <label>Fecha final:</label>
+    </div>
+    <div>
+        <input id="date1" type="date" />&emsp;
+        <input id="date2" type="date" />
+        <br />
+    </div>
+</div>
+<div>
+    @foreach (var transaction in Model.transactions)
+    {
+        <button type="submit" class="btn btn-outline-secondary btn-block">
+            <span class="float-left">
+                @transaction.TransDescription
+            </span>
+            <br />
+            <span class="float-left" style="color: #000000">
+                @transaction.TransDate
+            </span>
+            <span class="float-right">
+                @if (Model.AccountNumber.Equals(transaction.AccountFrom))
+                {
+                    @("RD$ -" + string.Format("{0:0,0.00}", transaction.Amount))
+                }
+                else
+                {
+                    @("RD$ +" + string.Format("{0:0,0.00}", transaction.Amount))
+
+                }
+
+            </span>
+        </button>
+    }
+</div>
+
+

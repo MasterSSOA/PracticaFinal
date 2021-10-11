@@ -65,3 +65,8 @@ $(document).ready(function () {
         document.getElementById("goBack").value = "y";
     })
 })
+
+//asignar variable para obtener el AccountNumber de forma autamática.
+function getAccountNumber(object) {
+    document.getElementById("inAccountNumber").value = object;
+}

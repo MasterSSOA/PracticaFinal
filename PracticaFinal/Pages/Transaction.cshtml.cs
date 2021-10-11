@@ -47,7 +47,7 @@ namespace PracticaFinal.Pages
             if (TempData["ClientId"] != null)
             {
                 _id = (int)TempData["ClientId"];
-                TempData.Keep();
+                TempData.Keep("ClientId");
                 this.Type = Type;
                 accounts = accountRepository.GetAccounts(_id);
                 accountsFrom = new SelectList(accounts, nameof(Account.AccountBalance), nameof(Account.AccountNumber), null);
@@ -72,6 +72,7 @@ namespace PracticaFinal.Pages
                 //Obteniendo datos de la transacción.
                 transaction.AccountFrom = accountRepository.GetNumberFromAmount(accountFrom);
                 transaction.AccountTo = accountRepository.GetNumberFromAmount(accountTo);
+                transaction.Amount = transaction.Amount;
                 transaction.TransDescription = "Transacción no. " + RandomDigits(10);
                 transaction.TransDate = DateTime.Now;
 
