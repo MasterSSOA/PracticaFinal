@@ -21,8 +21,6 @@ function getComboFromData(selectObject) {
     document.getElementById("lbAmount").innerHTML = "RD" + MoneyFormat.format(value);
 }
 
-
-
 //Función para evitar transferir al misma cuenta.
 $(document).ready(function () {
     $('#dropdown1').on('change', function () {
@@ -59,4 +57,11 @@ $(document).ready(function () {
 //deshabilitar boton de transferir.
 $(document).ready(function () {
     $('#btnsubmit').attr('disabled',true);
+})
+
+//creando una variable de para el botón Cancel.
+$(document).ready(function () {
+    $('#btncancel').on('click', function () {
+        document.getElementById("goBack").value = "y";
+    })
 })

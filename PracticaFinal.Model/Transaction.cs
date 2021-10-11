@@ -11,7 +11,7 @@ namespace PracticaFinal.Models
     {
         public int TransNumber { get; set; }
         public DateTime TransDate { get; set; }
-        [Required]
+        [Required(ErrorMessage ="No se puede dejar este campo vacio.")]
         public double Amount { get; set; }
         public string TransDescription { get; set; }
         public int AccountFrom { get; set; }

@@ -62,6 +62,11 @@ namespace PracticaFinal.Repository.Accounts
             account.AccountBalance += balance;
             return account;
         }
-       
+
+        public List<Account> GetAnothersAccounts(int ClientID)
+        {
+            var match = accounts.FindAll(a => a.ClientId.Equals(ClientID));
+            return accounts.Where(a => !match.Contains(a)).ToList();
+        }
     }
 }

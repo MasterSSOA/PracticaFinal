@@ -23,14 +23,16 @@ namespace PracticaFinal.Pages
         public string accountFrom { get; set; }
         [BindProperty]
         public string accountTo { get; set; }
+        [BindProperty]
+        public string goBack { get; set; }
 
         private int _id;
-        public string Type;
         private List<Account> accounts;
         public IEnumerable<SelectListItem> accountsTo;
         public IEnumerable<SelectListItem> accountsFrom;
         private readonly IAccountRepository accountRepository;
         private readonly ITransactionRepository transactionRepository;
+        public string Type;
 
         //Constructor.
         public TransactionModel(IAccountRepository accountRepository, ITransactionRepository transactionRepository)
@@ -45,30 +47,39 @@ namespace PracticaFinal.Pages
             if (TempData["ClientId"] != null)
             {
                 _id = (int)TempData["ClientId"];
-                TempData.Keep("ClientId");
+                TempData.Keep();
                 this.Type = Type;
                 accounts = accountRepository.GetAccounts(_id);
                 accountsFrom = new SelectList(accounts, nameof(Account.AccountBalance), nameof(Account.AccountNumber), null);
+
+                //Obteniendo el dropdown dependiendo la solicitud.
+                if (!Type.Equals("Transferencias"))
+                    accounts = accountRepository.GetAnothersAccounts(_id);
                 accountsTo = new SelectList(accounts, nameof(Account.AccountBalance), nameof(Account.AccountNumber), null);
+
                 return Page();
             }
             return RedirectToPage("./Error");
         }
-        public IActionResult OnPost() 
+        public IActionResult OnPost(string Type) 
         {
-            if (!ModelState.IsValid)
-                return Page();            
+            this.Type = Type;
+            if (goBack == "n")
+            {
+                if (!ModelState.IsValid)
+                    return Page();
 
-            //Obteniendo datos de la transacción.
-            transaction.AccountFrom = accountRepository.GetNumberFromAmount(accountFrom);
-            transaction.AccountTo = accountRepository.GetNumberFromAmount(accountTo);
-            transaction.TransDescription = "Transacción no. " + RandomDigits(10);
-            transaction.TransDate = DateTime.Now;
+                //Obteniendo datos de la transacción.
+                transaction.AccountFrom = accountRepository.GetNumberFromAmount(accountFrom);
+                transaction.AccountTo = accountRepository.GetNumberFromAmount(accountTo);
+                transaction.TransDescription = "Transacción no. " + RandomDigits(10);
+                transaction.TransDate = DateTime.Now;
 
-            //Creando transacción.
-            transactionRepository.CreateTransaction(transaction);
-            accountRepository.UpdateBalance(transaction.AccountFrom, transaction.Amount, false);
-            accountRepository.UpdateBalance(transaction.AccountTo, transaction.Amount, true);
+                //Creando transacción.
+                transactionRepository.CreateTransaction(transaction);
+                accountRepository.UpdateBalance(transaction.AccountFrom, transaction.Amount, false);
+                accountRepository.UpdateBalance(transaction.AccountTo, transaction.Amount, true);
+            }
             return RedirectToPage("./Home");
         }
 

@@ -4,6 +4,7 @@
     ViewData["Title"] = "Transacción";
 }
 
+
 @if (Model.Type.Equals("Transferencias"))
 {
     <div>
@@ -14,7 +15,7 @@
         <div class="form-group">
             <label>Desde cuenta:</label>
             <select id="dropdown1" asp-for="@Model.accountFrom" asp-items="@Model.accountsFrom" class="form-control"><option value=""></option></select>
-           
+
             <label class="float-left small">Balance disponible:</label>
             <label id="lbAmount" class="float-right small"></label><br />
         </div>
@@ -27,16 +28,36 @@
             <input id="tbMonto" type="number" asp-for="@Model.transaction.Amount" class="form-control" placeholder="Digite el monto" />
             <span asp-validation-for="@Model.transaction.Amount" class="alert-danger"></span>
         </div>
-        <button type="submit" class="btn btn-secondary">Cancelar</button>
+        <input id="goBack" type="hidden" value="n" asp-for="@Model.goBack" />
+        <button id="btncancel" type="submit" class="btn btn-secondary">Cancelar</button>
         <button id="btnsubmit" type="submit" class="btn btn-primary">Transferir</button>
     </form>
-
-
-
 }
 else
 {
     <div>
-        <h4>Pagos a Terceros</h4>
+        <h4>Pagos a Tercero</h4>
+        <br />
     </div>
+    <form method="post">
+        <div class="form-group">
+            <label>Desde cuenta:</label>
+            <select id="dropdown1" asp-for="@Model.accountFrom" asp-items="@Model.accountsFrom" class="form-control"><option value=""></option></select>
+
+            <label class="float-left small">Balance disponible:</label>
+            <label id="lbAmount" class="float-right small"></label><br />
+        </div>
+        <div class="form-group">
+            <label>Beneficiario:</label>
+            <select id="dropdown2" asp-for="@Model.accountTo" asp-items="@Model.accountsTo" class="form-control"><option value=""></option></select>
+        </div>
+        <div class="form-group">
+            <label>Monto a pagar:</label>
+            <input id="tbMonto" type="number" asp-for="@Model.transaction.Amount" class="form-control" placeholder="Digite el monto" />
+            <span asp-validation-for="@Model.transaction.Amount" class="alert-danger"></span>
+        </div>
+        <input id="goBack" type="hidden" value="n" asp-for="@Model.goBack" />
+        <button id="btncancel" type="submit" class="btn btn-secondary">Cancelar</button>
+        <button id="btnsubmit" type="submit" class="btn btn-primary">Transferir</button>
+    </form>
 }

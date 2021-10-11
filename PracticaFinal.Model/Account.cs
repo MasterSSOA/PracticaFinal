@@ -12,6 +12,5 @@ namespace PracticaFinal.Models
         public int AccountNumber { get; set; }
         public double AccountBalance { get; set; }
         public int ClientId { get; set; }
-        public Client Client { get; set; }
     }
 }
