@@ -11,9 +11,10 @@ namespace PracticaFinal.Models
     {
         public int TransNumber { get; set; }
         public DateTime TransDate { get; set; }
+        [Required]
         public double Amount { get; set; }
         public string TransDescription { get; set; }
-        public Account AccountFrom { get; set; }
-        public Account AccountTo { get; set; }
+        public int AccountFrom { get; set; }
+        public int AccountTo { get; set; }
     }
 }

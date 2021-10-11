@@ -42,10 +42,26 @@ namespace PracticaFinal.Repository.Accounts
             };
 
         //Methods.
-        public List<Account> GetAccounts(int ClientID) => 
+        public List<Account> GetAccounts(int ClientID) =>
             accounts.FindAll(a => a.ClientId.Equals(ClientID));
 
-        public Account GetAccount(int AccountId) => 
+        public Account GetAccount(int AccountId) =>
             accounts.Find(a => a.AccountNumber.Equals(AccountId));
+
+        public int GetNumberFromAmount(string Amount) =>
+            accounts.Find(a => a.AccountBalance.Equals(double.Parse(Amount))).AccountNumber;
+
+        public Account UpdateBalance(int Account, double balance, bool IsAdding) 
+        {
+            var account = accounts.Find(a => a.AccountNumber.Equals(Account));
+            if (!IsAdding)
+            {
+                account.AccountBalance -= balance;
+                return account;
+            }
+            account.AccountBalance += balance;
+            return account;
+        }
+       
     }
 }

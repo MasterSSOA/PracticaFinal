@@ -10,5 +10,6 @@ namespace PracticaFinal.Repository.Transactions
     public interface ITransactionRepository
     {
         public List<Transaction> GetTransactions(Account accountNo, DateTime initialDate, DateTime finalDate);
+        public void CreateTransaction(Transaction transaction);
     }
 }

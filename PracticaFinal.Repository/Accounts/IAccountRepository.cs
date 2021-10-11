@@ -11,5 +11,7 @@ namespace PracticaFinal.Repository.Accounts
     {
         public List<Account> GetAccounts(int ClientID);
         public Account GetAccount(int AccountId);
+        public int GetNumberFromAmount(string Amount);
+        public Account UpdateBalance(int Account, double balance, bool IsAdding);
     }
 }
