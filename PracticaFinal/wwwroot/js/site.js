@@ -25,7 +25,8 @@ function getComboFromData(selectObject) {
 $(document).ready(function () {
     $('#dropdown1').on('change', function () {
         if (document.getElementById("dropdown1").value == document.getElementById("dropdown2").value
-            || document.getElementById("tbMonto").value == "") {
+            || document.getElementById("tbMonto").value == ""
+            || document.getElementById("dropdown1").value < document.getElementById("tbMonto").value){
             document.getElementById("btnsubmit").disabled = true;
         }
         else {
@@ -35,7 +36,8 @@ $(document).ready(function () {
 
     $('#dropdown2').on('change', function () {
         if (document.getElementById("dropdown1").value == document.getElementById("dropdown2").value
-            || document.getElementById("tbMonto").value == "") {
+            || document.getElementById("tbMonto").value == ""
+            || document.getElementById("dropdown1").value < document.getElementById("tbMonto").value){
             document.getElementById("btnsubmit").disabled = true;
         }
         else {
@@ -45,7 +47,8 @@ $(document).ready(function () {
 
     $('#tbMonto').on('change', function () {
         if (document.getElementById("dropdown1").value == document.getElementById("dropdown2").value
-            || document.getElementById("tbMonto").value == "") {
+            || document.getElementById("tbMonto").value == ""
+            || document.getElementById("dropdown1").value < document.getElementById("tbMonto").value){
             document.getElementById("btnsubmit").disabled = true;
         }
         else {

@@ -33,7 +33,7 @@ namespace PracticaFinal.Pages
         //Methods.
         public IActionResult OnGet()
         {
-            if (TempData["ClientId"] != null)
+            if (TempData["ClientId"] != null && !TempData["ClientId"].ToString().Equals("0"))
             {
                 _id = (int)TempData["ClientId"];
                 TempData.Keep("ClientId");

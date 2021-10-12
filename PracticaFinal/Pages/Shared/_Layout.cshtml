@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    @if (!ViewData["Title"].ToString().Equals("Login"))
+    @if (!ViewData["Title"].ToString().Equals("Login") && !ViewData["Title"].ToString().Equals("Error"))
     {
         <header>
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">

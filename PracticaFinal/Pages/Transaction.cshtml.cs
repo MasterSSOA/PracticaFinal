@@ -18,9 +18,6 @@ namespace PracticaFinal.Pages
         [TempData]
         public int ClientId { get; set; }
         [BindProperty]
-        public double amountAvailable { get; set; }
-
-        [BindProperty]
         public Transaction transaction { get; set; }
         [BindProperty]
         public string accountFrom { get; set; }
@@ -47,7 +44,7 @@ namespace PracticaFinal.Pages
         //Methods.
         public IActionResult OnGet(string Type)
         {
-            if (TempData["ClientId"] != null)
+            if (TempData["ClientId"] != null && !TempData["ClientId"].ToString().Equals("0"))
             {
                 _id = (int)TempData["ClientId"];
                 TempData.Keep("ClientId");
@@ -72,8 +69,6 @@ namespace PracticaFinal.Pages
                 if (!ModelState.IsValid)
                     return Page();
 
-                if (amountAvailable < transaction.Amount)
-                    return Page();
                 //Obteniendo datos de la transacción.
                 transaction.AccountFrom = accountRepository.GetNumberFromAmount(accountFrom);
                 transaction.AccountTo = accountRepository.GetNumberFromAmount(accountTo);

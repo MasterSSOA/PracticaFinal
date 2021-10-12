@@ -23,25 +23,25 @@ namespace PracticaFinal.Pages
         public List<Transaction> transactions;
         private readonly ITransactionRepository transactionRepository;
 
-
         //Constructor.
         public TransactionsModel(ITransactionRepository transactionRepository)
         {
             this.transactionRepository = transactionRepository;
         }
 
-
         //Methods.
-        public void OnGet()
+        public IActionResult OnGet()
         {
-            if (TempData["AccountNumber"] != null)
+            if (TempData["AccountNumber"] != null && !TempData["AccountNumber"].ToString().Equals("0"))
             {
                 date1 = DateTime.Now.AddMonths(-1);
                 date2 = DateTime.Now;
                 transactions = transactionRepository.GetTransactions(AccountNumber, date1, date2);
                 AccountNumber = (int)TempData["AccountNumber"];
                 TempData.Keep("AccountNumber");
+                return Page();
             }
+            return RedirectToPage("./Error");
         }
 
         public IActionResult OnPost()
