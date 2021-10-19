@@ -14,18 +14,18 @@
     <form method="post">
         <div class="form-group">
             <label>Desde cuenta:</label>
-            <select id="dropdown1" asp-for="@Model.accountFrom" asp-items="@Model.accountsFrom" class="form-control"><option value=""></option></select>
+            <select id="dropdown1" asp-for="@Model.accountFrom" asp-items="@Model.accountsFrom" class="form-control" onchange="fieldValidations()"><option value=""></option></select>
 
             <label class="float-left small">Balance disponible:</label>
             <label id="lbAmount" class="float-right small"></label><br />
         </div>
         <div class="form-group">
             <label>Beneficiario:</label>
-            <select id="dropdown2" asp-for="@Model.accountTo" asp-items="@Model.accountsTo" class="form-control"><option value=""></option></select>
+            <select id="dropdown2" asp-for="@Model.accountTo" asp-items="@Model.accountsTo" class="form-control" onchange="fieldValidations()"><option value=""></option></select>
         </div>
         <div class="form-group">
             <label>Monto a pagar:</label>
-            <input id="tbMonto" type="number" asp-for="@Model.transaction.Amount" class="form-control" placeholder="Digite el monto" />
+            <input id="tbMonto" type="number" asp-for="@Model.transaction.Amount" class="form-control" placeholder="Digite el monto" onchange="fieldValidations()"/>
             <span asp-validation-for="@Model.transaction.Amount" class="alert-danger"></span>
         </div>
         <input id="goBack" type="hidden" value="n" asp-for="@Model.goBack" />
@@ -42,18 +42,18 @@ else
     <form method="post">
         <div class="form-group">
             <label>Desde cuenta:</label>
-            <select id="dropdown1" asp-for="@Model.accountFrom" asp-items="@Model.accountsFrom" class="form-control"><option value=""></option></select>
+            <select id="dropdown1" asp-for="@Model.accountFrom" asp-items="@Model.accountsFrom" class="form-control" onchange="fieldValidations()"><option value=""></option></select>
 
             <label class="float-left small">Balance disponible:</label>
             <label id="lbAmount" class="float-right small"></label><br />
         </div>
         <div class="form-group">
             <label>Beneficiario:</label>
-            <select id="dropdown2" asp-for="@Model.accountTo" asp-items="@Model.accountsTo" class="form-control"><option value=""></option></select>
+            <select id="dropdown2" asp-for="@Model.accountTo" asp-items="@Model.accountsTo" class="form-control" onchange="fieldValidations()"><option value=""></option></select>
         </div>
         <div class="form-group">
             <label>Monto a pagar:</label>
-            <input id="tbMonto" type="number" asp-for="@Model.transaction.Amount" class="form-control" placeholder="Digite el monto" />
+            <input id="tbMonto" type="number" asp-for="@Model.transaction.Amount" class="form-control" placeholder="Digite el monto" onchange="fieldValidations()"/>
             <span asp-validation-for="@Model.transaction.Amount" class="alert-danger"></span>
         </div>
         <input id="goBack" type="hidden" value="n" asp-for="@Model.goBack" />
